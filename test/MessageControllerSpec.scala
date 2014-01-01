@@ -28,9 +28,10 @@ object MessageControllerSpec extends Specification {
       createMessage("Foo")
       createMessage("Bar")
       val messages = Json.parse(contentAsString(MessageController.getMessages(0, 10)(FakeRequest()))).as[Seq[Message]]
+      println(messages)
       messages must haveSize(2)
-      messages(0).message must_== "Bar"
-      messages(1).message must_== "Foo"
+      messages(0).message must_== "Foo"
+      messages(1).message must_== "Bar"
     }
 
     "page messages" in withMongoDb { implicit app =>

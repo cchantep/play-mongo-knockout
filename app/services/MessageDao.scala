@@ -42,10 +42,9 @@ object MessageDao {
    */
   def findAll(page: Int, perPage: Int): Future[Seq[Message]] = {
     collection.find(Json.obj())
-      .options(QueryOpts(skipN = page * perPage))
-      .sort(Json.obj("_id" -> -1))
+      .options(QueryOpts(page * perPage))
       .cursor[Message]
-      .toList(perPage)
+      .collect[Seq](perPage)
   }
 
   /** The total number of messages */
