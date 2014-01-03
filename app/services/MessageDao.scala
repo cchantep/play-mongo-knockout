@@ -43,6 +43,7 @@ object MessageDao {
   def findAll(page: Int, perPage: Int): Future[Seq[Message]] = {
     collection.find(Json.obj())
       .options(QueryOpts(page * perPage))
+      .sort(Json.obj("_id" -> -1))
       .cursor[Message]
       .collect[Seq](perPage)
   }
