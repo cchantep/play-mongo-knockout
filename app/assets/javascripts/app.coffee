@@ -1,5 +1,4 @@
-require(["webjars!knockout.js", 'webjars!jquery.js', "/routes.js", "webjars!bootstrap.js"], (ko) ->
-
+require(["knockout", "jquery", "/routes.js", "bootstrap"], (ko) ->
   messagesPerPage = 10
 
   # Models for the messages page

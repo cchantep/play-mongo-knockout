@@ -2,7 +2,6 @@ package models
 
 import play.api.libs.json.Json
 import reactivemongo.bson.BSONObjectID
-import play.modules.reactivemongo.json.BSONFormats._
 
 /**
  * A message class
@@ -13,6 +12,8 @@ import play.modules.reactivemongo.json.BSONFormats._
 case class Message(_id: BSONObjectID, message: String)
 
 object Message {
+  import reactivemongo.play.json._
+
   /**
    * Format for the message.
    *

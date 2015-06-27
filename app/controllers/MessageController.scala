@@ -1,14 +1,25 @@
 package controllers
 
+import javax.inject.Inject
+
 import play.api.mvc._
 import play.api.libs.json.Json
 import play.api.libs.concurrent.Execution.Implicits._
+
 import models._
 import services.MessageDao
 import reactivemongo.bson.BSONObjectID
 import scala.concurrent.Future
 
-object MessageController extends Controller {
+import play.modules.reactivemongo.{
+  MongoController, ReactiveMongoApi, ReactiveMongoComponents
+}
+
+class MessageController @Inject() (
+  val reactiveMongoApi: ReactiveMongoApi)
+    extends Controller with MongoController with ReactiveMongoComponents {
+
+  implicit def eventPlugin = new services.EventPlugin(reactiveMongoApi)
 
   /** Action to get the messages */
   def getMessages(page: Int, perPage: Int) = Action.async { implicit req =>

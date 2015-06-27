@@ -5,14 +5,16 @@ import play.api.libs.json.Json
 import reactivemongo.bson.BSONObjectID
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
-import services.{EventDao, MessageDao}
+import services.{ EventDao, EventPlugin, MessageDao }
 import MongoDBTestUtils.withMongoDb
 
 object EventsSpec extends Specification {
 
   "Events" should {
 
-    "publish a new event when a message is saved" in withMongoDb { implicit app =>
+    "publish a new event when a message is saved" in withMongoDb { (_, api) =>
+      implicit val plugin = new EventPlugin(api)
+
       val futureEvent = EventDao.stream |>>> Iteratee.head
       val message = Message(BSONObjectID.generate, "Foo")
       MessageDao.save(message)

@@ -5,11 +5,14 @@
 <head>
     <title>@title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.css"))'>
-    <link rel='stylesheet' media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap-theme.css"))'>
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))">
+    <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap-theme.css"))">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-    <script data-main="@routes.Assets.at("javascripts/app.js")" type='text/javascript' src='@routes.WebJarAssets.requirejs'></script>
+    <script>
+      @Html(org.webjars.RequireJS.getSetupJavaScript(routes.WebJarAssets.at("").url))
+    </script>    
+    <script data-main="@routes.Assets.versioned("javascripts/app.js")" type="text/javascript" src="@routes.Assets.versioned("lib/requirejs/require.js")"></script>
 </head>
 <body>
     <nav class="navbar navbar-inverse" role="navigation">

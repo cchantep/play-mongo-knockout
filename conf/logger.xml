@@ -1,0 +1,18 @@
+<configuration>
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="application" level="WARN" />
+  <logger name="akka" level="WARN" />
+  <logger name="reactivemongo" level="WARN" />
+  <logger name="play.api.libs.concurrent.ActorSystemProvider" level="WARN" />
+  
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
